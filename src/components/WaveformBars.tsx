@@ -4,13 +4,15 @@ const HEIGHTS = [0.4, 0.65, 0.9, 0.5, 1, 0.6, 0.8, 0.35, 0.7, 0.95, 0.45, 0.6, 0
 
 export function WaveformBars({
   active = false,
+  heightClassName = "h-10",
   className = "",
 }: {
   active?: boolean;
+  heightClassName?: string;
   className?: string;
 }) {
   return (
-    <div className={`flex items-end gap-[3px] h-10 ${className}`} aria-hidden="true">
+    <div className={`flex items-end gap-[3px] ${heightClassName} ${className}`} aria-hidden="true">
       {HEIGHTS.map((h, i) => (
         <span
           key={i}
