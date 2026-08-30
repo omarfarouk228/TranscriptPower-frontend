@@ -6,6 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Header } from "@/components/Header";
 import { Modal } from "@/components/Modal";
+import { Sheet } from "@/components/Sheet";
 import { TranscriptResult } from "@/components/TranscriptResult";
 import {
   deleteTranscriptionJob,
@@ -140,13 +141,13 @@ export default function HistoryPage() {
       </main>
 
       {openJob && (
-        <Modal title={openJob.filename} onClose={() => setOpenJob(null)}>
+        <Sheet title={openJob.filename} onClose={() => setOpenJob(null)}>
           <TranscriptResult
             text={openJob.text ?? ""}
             filename={openJob.filename}
             detectedLanguage={openJob.detected_language}
           />
-        </Modal>
+        </Sheet>
       )}
 
       {deleteTarget && (
