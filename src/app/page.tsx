@@ -10,6 +10,7 @@ import { TranscribingPanel } from "@/components/TranscribingPanel";
 import { TranscriptResult } from "@/components/TranscriptResult";
 import { UploadDropzone } from "@/components/UploadDropzone";
 import {
+  ApiError,
   cancelTranscriptionJob,
   createTranscriptionJob,
   getTranscriptionJob,
@@ -65,8 +66,10 @@ export default function Home() {
             toast.error("Connexion au serveur perdue pendant le traitement.");
           }
         }, POLL_INTERVAL_MS);
-      } catch {
-        toast.error("Impossible de contacter le serveur de transcription.");
+      } catch (err) {
+        toast.error(
+          err instanceof ApiError ? err.message : "Impossible de contacter le serveur de transcription.",
+        );
       }
     },
     [language, token, stopPolling],

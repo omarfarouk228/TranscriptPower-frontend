@@ -9,6 +9,7 @@ import { Modal } from "@/components/Modal";
 import { Sheet } from "@/components/Sheet";
 import { TranscriptResult } from "@/components/TranscriptResult";
 import {
+  ApiError,
   deleteTranscriptionJob,
   listTranscriptionJobs,
   type TranscriptionJob,
@@ -35,7 +36,7 @@ export default function HistoryPage() {
 
     listTranscriptionJobs(token)
       .then(setJobs)
-      .catch((err) => toast.error(err instanceof Error ? err.message : "Échec du chargement"));
+      .catch((err) => toast.error(err instanceof ApiError ? err.message : "Échec du chargement"));
   }, [token, isAuthLoading, router]);
 
   const handleCopy = useCallback(async (text: string) => {
@@ -56,7 +57,7 @@ export default function HistoryPage() {
       toast.success("Transcription supprimée");
       setDeleteTarget(null);
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Échec de la suppression");
+      toast.error(err instanceof ApiError ? err.message : "Échec de la suppression");
     } finally {
       setIsDeleting(false);
     }

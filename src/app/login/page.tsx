@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { AuthCard } from "@/components/AuthCard";
 import { Header } from "@/components/Header";
 import { PasswordInput } from "@/components/PasswordInput";
+import { ApiError } from "@/lib/api";
 import { useAuth } from "@/lib/auth-context";
 
 export default function LoginPage() {
@@ -24,7 +25,7 @@ export default function LoginPage() {
       toast.success("Connecté");
       router.push("/");
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Échec de la connexion");
+      toast.error(err instanceof ApiError ? err.message : "Échec de la connexion");
     } finally {
       setIsSubmitting(false);
     }

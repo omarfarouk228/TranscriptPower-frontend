@@ -18,7 +18,7 @@ export interface User {
   is_verified: boolean;
 }
 
-class ApiError extends Error {
+export class ApiError extends Error {
   constructor(
     message: string,
     public status: number,

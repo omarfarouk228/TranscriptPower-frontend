@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import { AuthCard } from "@/components/AuthCard";
 import { Header } from "@/components/Header";
-import { verifyEmail } from "@/lib/api";
+import { ApiError, verifyEmail } from "@/lib/api";
 
 type Status = "verifying" | "success" | "error";
 
@@ -27,7 +27,7 @@ function VerifyContent() {
       })
       .catch((err) => {
         setStatus("error");
-        setMessage(err instanceof Error ? err.message : "Lien de confirmation invalide");
+        setMessage(err instanceof ApiError ? err.message : "Lien de confirmation invalide");
       });
   }, [token]);
 

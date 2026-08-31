@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { AuthCard } from "@/components/AuthCard";
 import { Header } from "@/components/Header";
 import { PasswordInput } from "@/components/PasswordInput";
-import { registerAccount } from "@/lib/api";
+import { ApiError, registerAccount } from "@/lib/api";
 
 export default function RegisterPage() {
   const [fullName, setFullName] = useState("");
@@ -22,7 +22,7 @@ export default function RegisterPage() {
       await registerAccount(fullName, email, password);
       setIsRegistered(true);
     } catch (err) {
-      toast.error(err instanceof Error ? err.message : "Échec de l'inscription");
+      toast.error(err instanceof ApiError ? err.message : "Échec de l'inscription");
     } finally {
       setIsSubmitting(false);
     }
